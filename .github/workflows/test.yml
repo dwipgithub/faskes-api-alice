@@ -6,12 +6,12 @@ on:
       - main
 
 jobs:
-  test:
+  docker-build:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout source code
         uses: actions/checkout@v4
 
-      - name: Test GitHub Actions
-        run: echo "Hello from GitHub Actions!"
+      - name: Build Docker image
+        run: docker build -t faskes-api-alice:test .
