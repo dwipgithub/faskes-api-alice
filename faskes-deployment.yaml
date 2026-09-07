@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: faskes-api
+
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: faskes-api
+
+  template:
+    metadata:
+      labels:
+        app: faskes-api
+
+    spec:
+      containers:
+        - name: faskes-api
+          image: faskes-api-alice:1.2
+          imagePullPolicy: Never
+
+          ports:
+            - containerPort: 8081
+
+          env:
+            - name: DB_HOST
+              value: "host.docker.internal"
+
+            - name: DB_PORT
+              value: "3308"
+
+          volumeMounts:
+            - name: faskes-env
+              mountPath: /app/.env
+              subPath: .env
+              readOnly: true
+
+      volumes:
+        - name: faskes-env
+          secret:
+            secretName: faskes-env

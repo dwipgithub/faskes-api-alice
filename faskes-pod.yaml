@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Pod
+
+metadata:
+  name: faskes-api
+
+spec:
+  containers:
+    - name: faskes-api
+      image: faskes-api-alice:1.1
+      imagePullPolicy: Never
+
+      ports:
+        - containerPort: 8081
+
+      env:
+        - name: DB_HOST
+          value: "host.docker.internal"
+
+        - name: DB_PORT
+          value: "3308"
+
+      volumeMounts:
+        - name: faskes-env
+          mountPath: /app/alice/.env
+          subPath: .env
+          readOnly: true
+
+  volumes:
+    - name: faskes-env
+      secret:
+        secretName: faskes-env
