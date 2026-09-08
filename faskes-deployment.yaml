@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: faskes-api
-          image: faskes-api-alice:1.2
+          image: dwipdocker/faskes-api-alice:1.5
           imagePullPolicy: Never
 
           ports:

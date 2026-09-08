@@ -198,7 +198,7 @@ func (h *AuthHandler) Login(c *gin.Context) {
 		http.StatusCreated,
 		authModel.LoginResponse{
 			Status:  true,
-			Message: "token created",
+			Message: "accesstoken created",
 			Data: &authModel.LoginData{
 				AccessToken: accessToken,
 				IssuedAt:    issuedAt.Format(time.RFC3339),
